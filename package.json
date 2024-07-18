@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/clerk-sdk-node": "^5.0.16",
     "@clerk/nextjs": "^5.2.4",
     "@hookform/resolvers": "^3.9.0",
     "@notionhq/client": "^2.2.15",
