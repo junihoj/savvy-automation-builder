@@ -2,12 +2,15 @@ import { db } from '@/lib/db'
 import React from 'react'
 import { currentUser } from '@clerk/nextjs/server'
 import ProfilePicture from './_components/profile-picture'
+import ProfileForm from '@/components/forms/profile-form'
 type Props = {}
 const Settings = async (props: Props) => {
     const authUser = await currentUser()
     if (!authUser) return null
 
     const user = await db.user.findUnique({ where: { clerkId: authUser.id } })
+
+    console.log("USER DATA", user)
     const removeProfileImage = async () => {
         'use server'
         const response = await db.user.update({
@@ -66,12 +69,13 @@ const Settings = async (props: Props) => {
                 <ProfilePicture
                     onDelete={removeProfileImage}
                     userImage={user?.profileImage || ''}
+                    // userImage={''}
                     onUpload={uploadProfileImage}
                 />
-                {/* <ProfileForm
+                <ProfileForm
                     user={user}
                     onUpdate={updateUserInfo}
-                /> */}
+                />
             </div>
         </div>
     )
